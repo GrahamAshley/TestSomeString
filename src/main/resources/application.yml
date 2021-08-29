@@ -1,0 +1,115 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "httptrace,health,shutdown"
+        ## 健康检查根路径
+      base-path: "/actuator"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+shutdown:
+  whitelist: 0:0:0:0:0:0:0:1,127.0.0.1
+spring:
+  rabbitmq:
+    username: guest
+    password: guest
+    virtual-host: /
+    port: 5671
+    host: 172.16.9.224
+  datasource:
+    druid:
+      url: jdbc:mysql://172.16.9.77:3306/tospur_house?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      username: shtestagentcloud
+      password: ShTcwTEst#@2021
+#      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.jdbc.Driver
+  data:
+    mongodb:
+#      username: root
+#      password: Mongo@dmin
+      authentication-database: admin
+#      host: 172.16.9.58
+      database: tospur
+      uri: mongodb://root:Mongo%40dmin@172.16.9.58:27017/
+#      username: root
+#      password: root
+#      authentication-database: admin
+#      host: 172.16.17.142
+#      database: Test
+server:
+  port: 8888
+sa-token:
+  is-print: true
+mybatis:
+  config-location: classpath:mybatis.xml
+  mapper-locations: classpath:mapper/*.xml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#version: '3'
+
+#services:
+#  mongo:
+#    image: mongo
+#    container_name: mongo
+#    hostname: mongo
+#    restart: always
+#    networks:
+#      - db
+#    ports:
+#      - "27017:27017"
+#    environment: #设置数据库用户名和密码
+#      TZ: Asia/Shanghai
+#      MONGO_INITDB_DATABASE: test
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: 123456
+#    volumes: #数据卷映射
+#      - /mongoData/configdb/mongod.conf.orig:/etc/mongod.conf.orig  #这里做配置文件的映射，想通过配置文件开启数据库的权限验证，但好像没有效果，后面在研究下
+#      - /mongoData/data:/data/db
+#      - /mongoData/logs/:/var/log/mongodb
+#    command: [--auth] #开启mongo验证
+#
+#  mongo-express:
+#    image: mongo-express
+#    container_name: mongo-express
+#    restart: always
+#    links:
+#      - mongo:mongo
+#    depends_on:
+#      - mongo
+#    networks:
+#      - db
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      ME_CONFIG_OPTIONS_EDITORTHEME: 3024-night
+#      ME_CONFIG_MONGODB_SERVER: mongo
+#      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+#      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
+#      ME_CONFIG_BASICAUTH_USERNAME: root
+#      ME_CONFIG_BASICAUTH_PASSWORD: 123456
+#
+#networks:
+#  db:
+#    driver: bridge

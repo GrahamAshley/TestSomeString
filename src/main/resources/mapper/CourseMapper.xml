@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.admin.dao.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.test.admin.model.po.Course" >
+    <id column="act_list_id" property="actListId" jdbcType="INTEGER" />
+    <result column="act_title" property="actTitle" jdbcType="CHAR" />
+    <result column="act_content" property="actContent" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="act_begin_time" property="actBeginTime" jdbcType="TIMESTAMP" />
+    <result column="act_end_time" property="actEndTime" jdbcType="TIMESTAMP" />
+    <result column="act_rule" property="actRule" jdbcType="VARCHAR" />
+    <result column="bg_picture_app" property="bgPictureApp" jdbcType="VARCHAR" />
+    <result column="pop_picture_pc" property="popPicturePc" jdbcType="CHAR" />
+    <result column="bg_picture_pc" property="bgPicturePc" jdbcType="VARCHAR" />
+    <result column="share_picture" property="sharePicture" jdbcType="CHAR" />
+    <result column="pop_up" property="popUp" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_id" property="createId" jdbcType="VARCHAR" />
+    <result column="update_id" property="updateId" jdbcType="VARCHAR" />
+    <result column="act_money" property="actMoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    act_list_id, act_title, act_content, type, act_begin_time, act_end_time, act_rule,
+    bg_picture_app, pop_picture_pc, bg_picture_pc, share_picture, pop_up, status, create_time,
+    update_time, create_id, update_id, act_money
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.test.admin.model.po.CourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from act_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from act_list
+    where act_list_id = #{actListId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from act_list
+    where act_list_id = #{actListId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.test.admin.model.po.CourseExample" >
+    delete from act_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.test.admin.model.po.Course" >
+    insert into act_list (act_list_id, act_title, act_content,
+      type, act_begin_time, act_end_time,
+      act_rule, bg_picture_app, pop_picture_pc,
+      bg_picture_pc, share_picture, pop_up,
+      status, create_time, update_time,
+      create_id, update_id, act_money
+      )
+    values (#{actListId,jdbcType=INTEGER}, #{actTitle,jdbcType=CHAR}, #{actContent,jdbcType=CHAR},
+      #{type,jdbcType=TINYINT}, #{actBeginTime,jdbcType=TIMESTAMP}, #{actEndTime,jdbcType=TIMESTAMP},
+      #{actRule,jdbcType=VARCHAR}, #{bgPictureApp,jdbcType=VARCHAR}, #{popPicturePc,jdbcType=CHAR},
+      #{bgPicturePc,jdbcType=VARCHAR}, #{sharePicture,jdbcType=CHAR}, #{popUp,jdbcType=TINYINT},
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{createId,jdbcType=VARCHAR}, #{updateId,jdbcType=VARCHAR}, #{actMoney,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.admin.model.po.Course" >
+    insert into act_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="actListId != null" >
+        act_list_id,
+      </if>
+      <if test="actTitle != null" >
+        act_title,
+      </if>
+      <if test="actContent != null" >
+        act_content,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="actBeginTime != null" >
+        act_begin_time,
+      </if>
+      <if test="actEndTime != null" >
+        act_end_time,
+      </if>
+      <if test="actRule != null" >
+        act_rule,
+      </if>
+      <if test="bgPictureApp != null" >
+        bg_picture_app,
+      </if>
+      <if test="popPicturePc != null" >
+        pop_picture_pc,
+      </if>
+      <if test="bgPicturePc != null" >
+        bg_picture_pc,
+      </if>
+      <if test="sharePicture != null" >
+        share_picture,
+      </if>
+      <if test="popUp != null" >
+        pop_up,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="actMoney != null" >
+        act_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="actListId != null" >
+        #{actListId,jdbcType=INTEGER},
+      </if>
+      <if test="actTitle != null" >
+        #{actTitle,jdbcType=CHAR},
+      </if>
+      <if test="actContent != null" >
+        #{actContent,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="actBeginTime != null" >
+        #{actBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actEndTime != null" >
+        #{actEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actRule != null" >
+        #{actRule,jdbcType=VARCHAR},
+      </if>
+      <if test="bgPictureApp != null" >
+        #{bgPictureApp,jdbcType=VARCHAR},
+      </if>
+      <if test="popPicturePc != null" >
+        #{popPicturePc,jdbcType=CHAR},
+      </if>
+      <if test="bgPicturePc != null" >
+        #{bgPicturePc,jdbcType=VARCHAR},
+      </if>
+      <if test="sharePicture != null" >
+        #{sharePicture,jdbcType=CHAR},
+      </if>
+      <if test="popUp != null" >
+        #{popUp,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=VARCHAR},
+      </if>
+      <if test="actMoney != null" >
+        #{actMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.test.admin.model.po.CourseExample" resultType="java.lang.Integer" >
+    select count(*) from act_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update act_list
+    <set >
+      <if test="record.actListId != null" >
+        act_list_id = #{record.actListId,jdbcType=INTEGER},
+      </if>
+      <if test="record.actTitle != null" >
+        act_title = #{record.actTitle,jdbcType=CHAR},
+      </if>
+      <if test="record.actContent != null" >
+        act_content = #{record.actContent,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.actBeginTime != null" >
+        act_begin_time = #{record.actBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actEndTime != null" >
+        act_end_time = #{record.actEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actRule != null" >
+        act_rule = #{record.actRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bgPictureApp != null" >
+        bg_picture_app = #{record.bgPictureApp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popPicturePc != null" >
+        pop_picture_pc = #{record.popPicturePc,jdbcType=CHAR},
+      </if>
+      <if test="record.bgPicturePc != null" >
+        bg_picture_pc = #{record.bgPicturePc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sharePicture != null" >
+        share_picture = #{record.sharePicture,jdbcType=CHAR},
+      </if>
+      <if test="record.popUp != null" >
+        pop_up = #{record.popUp,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createId != null" >
+        create_id = #{record.createId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateId != null" >
+        update_id = #{record.updateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actMoney != null" >
+        act_money = #{record.actMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update act_list
+    set act_list_id = #{record.actListId,jdbcType=INTEGER},
+      act_title = #{record.actTitle,jdbcType=CHAR},
+      act_content = #{record.actContent,jdbcType=CHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      act_begin_time = #{record.actBeginTime,jdbcType=TIMESTAMP},
+      act_end_time = #{record.actEndTime,jdbcType=TIMESTAMP},
+      act_rule = #{record.actRule,jdbcType=VARCHAR},
+      bg_picture_app = #{record.bgPictureApp,jdbcType=VARCHAR},
+      pop_picture_pc = #{record.popPicturePc,jdbcType=CHAR},
+      bg_picture_pc = #{record.bgPicturePc,jdbcType=VARCHAR},
+      share_picture = #{record.sharePicture,jdbcType=CHAR},
+      pop_up = #{record.popUp,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_id = #{record.createId,jdbcType=VARCHAR},
+      update_id = #{record.updateId,jdbcType=VARCHAR},
+      act_money = #{record.actMoney,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.admin.model.po.Course" >
+    update act_list
+    <set >
+      <if test="actTitle != null" >
+        act_title = #{actTitle,jdbcType=CHAR},
+      </if>
+      <if test="actContent != null" >
+        act_content = #{actContent,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="actBeginTime != null" >
+        act_begin_time = #{actBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actEndTime != null" >
+        act_end_time = #{actEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actRule != null" >
+        act_rule = #{actRule,jdbcType=VARCHAR},
+      </if>
+      <if test="bgPictureApp != null" >
+        bg_picture_app = #{bgPictureApp,jdbcType=VARCHAR},
+      </if>
+      <if test="popPicturePc != null" >
+        pop_picture_pc = #{popPicturePc,jdbcType=CHAR},
+      </if>
+      <if test="bgPicturePc != null" >
+        bg_picture_pc = #{bgPicturePc,jdbcType=VARCHAR},
+      </if>
+      <if test="sharePicture != null" >
+        share_picture = #{sharePicture,jdbcType=CHAR},
+      </if>
+      <if test="popUp != null" >
+        pop_up = #{popUp,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=VARCHAR},
+      </if>
+      <if test="actMoney != null" >
+        act_money = #{actMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where act_list_id = #{actListId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.admin.model.po.Course" >
+    update act_list
+    set act_title = #{actTitle,jdbcType=CHAR},
+      act_content = #{actContent,jdbcType=CHAR},
+      type = #{type,jdbcType=TINYINT},
+      act_begin_time = #{actBeginTime,jdbcType=TIMESTAMP},
+      act_end_time = #{actEndTime,jdbcType=TIMESTAMP},
+      act_rule = #{actRule,jdbcType=VARCHAR},
+      bg_picture_app = #{bgPictureApp,jdbcType=VARCHAR},
+      pop_picture_pc = #{popPicturePc,jdbcType=CHAR},
+      bg_picture_pc = #{bgPicturePc,jdbcType=VARCHAR},
+      share_picture = #{sharePicture,jdbcType=CHAR},
+      pop_up = #{popUp,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_id = #{createId,jdbcType=VARCHAR},
+      update_id = #{updateId,jdbcType=VARCHAR},
+      act_money = #{actMoney,jdbcType=DECIMAL}
+    where act_list_id = #{actListId,jdbcType=INTEGER}
+  </update>
+</mapper>

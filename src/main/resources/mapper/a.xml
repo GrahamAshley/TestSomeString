@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.mapper.GetMapper" >
+  <select id="getDatebase" resultType="java.lang.String">
+    show databases
+  </select>
+    <select id="getDatabaseInfo" resultMap="getDatabaseInfoMap">
+      select table_schema ,TABLE_NAME  ,CREATE_TIME as '创建时间',TABLE_COMMENT as '描述'
+      from information_schema.tables
+    </select>
+  <select id="getColumn" resultType="com.test.entity.MyDataInfo$MyColumn">
+    select TABLE_SCHEMA AS '数据库名',TABLE_NAME as '数据库表',COLUMN_NAME as columnName,
+            IS_NULLABLE as '可为空',DATA_TYPE as '数据类型',CHARACTER_SET_NAME as '编码格式',
+            COLUMN_TYPE as '数据类型详情',COLUMN_KEY as '主键',COLUMN_COMMENT as columnDescription
+    from information_schema.columns where table_schema = #{databaseName} and table_name = #{tableName} ;
+  </select>
+  <resultMap id="getDatabaseInfoMap" type="com.test.entity.MyDataInfo">
+    <result column="table_schema" property="databaseName"/>
+    <result column="TABLE_COMMENT" property="tableDescription"/>
+    <collection property="myTables" ofType="com.test.entity.MyDataInfo$MyTable">
+      <result column="TABLE_NAME" property="tableName"/>
+    </collection>
+  </resultMap>
+</mapper>
