@@ -14,7 +14,10 @@
             COLUMN_TYPE as '数据类型详情',COLUMN_KEY as '主键',COLUMN_COMMENT as columnDescription
     from information_schema.columns where table_schema = #{databaseName} and table_name = #{tableName} ;
   </select>
-  <resultMap id="getDatabaseInfoMap" type="com.test.entity.MyDataInfo">
+    <select id="testDateQuery" resultType="java.lang.Integer">
+        select count(*) from customer_public_pool where  public_pool_time &lt;= #{date}
+    </select>
+    <resultMap id="getDatabaseInfoMap" type="com.test.entity.MyDataInfo">
     <result column="table_schema" property="databaseName"/>
     <result column="TABLE_COMMENT" property="tableDescription"/>
     <collection property="myTables" ofType="com.test.entity.MyDataInfo$MyTable">

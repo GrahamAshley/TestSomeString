@@ -166,7 +166,10 @@ public class SpringBootBuliangrenApplicationTests {
         }
 
     }
-
+    @Test
+    public void testMongo1(){
+        System.out.println(mongoTemplate.count(Query.query(Criteria.where("dataType").is("ARTICLE")), MongoTest.class));
+    }
     @Test
     public void testDatabase() throws IOException {
         List<MyDataInfo> databaseInfo = getMapper.getDatabaseInfo();
@@ -197,4 +200,9 @@ public class SpringBootBuliangrenApplicationTests {
         this.getWorkbook.close();
     }
 
+    @Test
+    public void  testDateQuery(){
+       Integer count= getMapper.testDateQuery(new Date());
+        System.out.println(count);
+    }
 }

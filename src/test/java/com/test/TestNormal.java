@@ -1,7 +1,5 @@
 package com.test;
 
-import cn.hutool.core.date.DateUtil;
-import com.test.pa.SimpleHttpServer;
 import com.test.pa.TestSync;
 import lombok.SneakyThrows;
 import org.junit.Test;
@@ -12,7 +10,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,8 +25,8 @@ public class TestNormal {
 
     @Test
     public void testDate(){
-        Date tomorrowdate = DateUtil.tomorrow().toJdkDate();
-        System.out.println(tomorrowdate);
+      String s="sda%ds%";
+        System.out.println(s.replaceFirst("%", "4"));
     }
     @Test
     public void testAtomic(){
@@ -169,7 +166,9 @@ public class TestNormal {
 
     @Test
     public void testWeb() throws Exception {
-        SimpleHttpServer.start();
+      String s="hello";
+        System.out.println(s.indexOf("e"));
+        System.out.println(s.substring(1,3));
     }
 }
 class Counter{
