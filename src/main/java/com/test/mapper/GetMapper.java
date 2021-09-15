@@ -16,4 +16,6 @@ public interface GetMapper {
     List<MyDataInfo.MyColumn> getColumn(@Param("databaseName")String databaseName,@Param("tableName")String tableName);
 
     Integer testDateQuery(Date date);
+
+    void insertT(int i);
 }

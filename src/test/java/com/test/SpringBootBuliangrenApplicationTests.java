@@ -18,6 +18,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ObjectUtils;
 
@@ -56,6 +57,8 @@ public class SpringBootBuliangrenApplicationTests {
 
     @Autowired
     private GetMapper getMapper;
+    @Autowired
+    private DataSourceTransactionManager dataSourceTransactionManager;
     // 2--不用写就是默认交换机
 // 3--队列名称是：hello
 // 发送的消息是HelloWorld
@@ -202,7 +205,13 @@ public class SpringBootBuliangrenApplicationTests {
 
     @Test
     public void  testDateQuery(){
-       Integer count= getMapper.testDateQuery(new Date());
-        System.out.println(count);
+       for (int i=0;i<10000000;i++){
+           getMapper.insertT(i);
+       }
+    }
+
+    @Test
+    public void testTransaction(){
+
     }
 }

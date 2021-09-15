@@ -21,9 +21,12 @@ spring:
     host: 172.16.9.224
   datasource:
     druid:
-      url: jdbc:mysql://172.16.9.77:3306/tospur_house?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-      username: shtestagentcloud
-      password: ShTcwTEst#@2021
+      url: jdbc:mysql://106.14.62.129:3306/efo?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+#      url: jdbc:mysql://172.16.9.77:3306/tospur_house?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      username: root
+#      username: shtestagentcloud
+#      password: ShTcwTEst#@2021
+      password: 123456
 #      driver-class-name: com.mysql.jdbc.Driver
       driver-class-name: com.mysql.jdbc.Driver
   data:
